@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Descarcă – Jocul Intersecțiilor</title>
+<meta name="description" content="Cine trece primul în intersecție? Joc gratuit pentru Android și iPhone.">
+<meta property="og:title" content="Jocul Intersecțiilor">
+<meta property="og:description" content="Cine trece primul în intersecție? Joc gratuit pentru Android și iPhone.">
+<style>
+  :root { --bg: #151c28; --fg: #f3f5f8; --muted: #a8afbd; --yellow: #ffd84d; --ink: #1d1d1f; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; background: radial-gradient(900px 600px at 50% -10%, #2a3a5c 0%, var(--bg) 65%); color: var(--fg);
+    font: 17px/1.55 'Segoe UI', system-ui, -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; padding: 32px 18px; }
+  main { max-width: 440px; width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  svg { width: 110px; height: 110px; filter: drop-shadow(0 8px 10px #0008); }
+  h1 { margin: 0; color: var(--yellow); font-size: 34px; line-height: 1.1; font-weight: 900; }
+  p { margin: 0; color: var(--muted); }
+  .btns { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 6px; }
+  a.btn { display: block; padding: 15px 18px; border-radius: 16px; font-weight: 800; font-size: 19px; text-decoration: none;
+    background: var(--yellow); color: var(--ink); border: 3px solid var(--ink); box-shadow: 0 5px 0 #0b0f17; }
+  a.btn.alt { background: #fff; }
+  .soon { padding: 13px 18px; border-radius: 16px; border: 2px dashed #3a465e; color: var(--muted); font-weight: 700; }
+  small { color: var(--muted); }
+  small a { color: var(--yellow); }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,3 97,50 50,97 3,50" fill="#1d1d1f"/><polygon points="50,8 92,50 50,92 8,50" fill="#fff"/><polygon points="50,21 79,50 50,79 21,50" fill="#1d1d1f"/><polygon points="50,24 76,50 50,76 24,50" fill="#ffc400"/></svg>
+  <h1>Jocul Intersecțiilor</h1>
+  <p id="msg">Cine trece primul în intersecție? Învață prioritatea jucându-te. Gratuit.</p>
+  <div class="btns">
+    <a class="btn" id="play" href="https://play.google.com/store/apps/details?id=ro.scoalasoferi.puzzle">Descarcă din Google Play</a>
+    <a class="btn alt" id="ios" href="#" hidden>Descarcă din App Store</a>
+    <div class="soon" id="ios-soon">Pentru iPhone: în curând în App Store</div>
+  </div>
+  <small><a href="index.html">Confidențialitate</a> · <a href="suport.html">Suport</a></small>
+</main>
+<script>
+  // ID-ul numeric din App Store Connect, după publicarea pe iPhone (același ca APP_STORE_ID din joc)
+  var APP_STORE_ID = '';
+  var PLAY = 'https://play.google.com/store/apps/details?id=ro.scoalasoferi.puzzle';
+  var ios = /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var android = /Android/i.test(navigator.userAgent);
+  var appStore = APP_STORE_ID ? 'https://apps.apple.com/app/id' + APP_STORE_ID : '';
+  if (appStore) {
+    document.getElementById('ios').href = appStore;
+    document.getElementById('ios').hidden = false;
+    document.getElementById('ios-soon').hidden = true;
+  }
+  // pe telefon: direct în magazinul potrivit
+  if (android) location.replace(PLAY);
+  else if (ios && appStore) location.replace(appStore);
+  else if (ios) {
+    document.getElementById('msg').textContent = 'Jocul ajunge în curând pe iPhone. Până atunci îl poți juca pe Android.';
+  }
+</script>
+</body>
+</html>
